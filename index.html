@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia Horibuss - Inscrição</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"/>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden;
+    color: #fff;
+    background: linear-gradient(135deg, #2a0a0f, #3a0b14);
+    position: relative;
+  }
+
+  header {
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    perspective: 800px;
+    z-index: 10;
+  }
+
+  .logo-outer {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid gold;
+    position: absolute;
+    top: 0; left: 0;
+    transform-style: preserve-3d;
+    animation: spin3d 8s linear infinite;
+    box-shadow: 0 0 25px rgba(255,215,0,0.7);
+  }
+
+  .logo-outer::before, .logo-outer::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-top: 4px solid gold;
+    border-right: 4px solid transparent;
+    border-radius: 50%;
+  }
+
+  .logo-outer::after { transform: rotateX(60deg) rotate(120deg); }
+  .logo-outer::before { transform: rotateX(60deg) rotate(240deg); }
+
+  .coin {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffd700, #c6a700 70%);
+    border: 4px solid gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%) rotateY(0deg);
+    box-shadow: inset 0 -5px 15px rgba(0,0,0,0.3),
+                0 0 30px gold, 0 0 60px rgba(255,215,0,0.6);
+    animation: coinSpin 2s linear infinite;
+    z-index: 10;
+  }
+
+  .coin::before {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.5), transparent 60%);
+  }
+
+  .coin span {
+    font-size: 45px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 15px #fff, 0 0 35px gold;
+  }
+
+  @keyframes spin3d {
+    from { transform: rotateY(0deg) rotateX(0deg); }
+    to { transform: rotateY(360deg) rotateX(360deg); }
+  }
+
+  @keyframes coinSpin {
+    0% { transform: translate(-50%, -50%) rotateY(0deg); }
+    100% { transform: translate(-50%, -50%) rotateY(360deg); }
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+    color: gold;
+    text-shadow: 0 0 10px gold;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #f0e6d2;
+  }
+
+  form {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid gold;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 420px;
+    margin: 30px auto;
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+    position: relative;
+    z-index: 10;
+  }
+
+  input, button {
+    width: 90%;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  input {
+    background: #3a0b14;
+    color: #fff;
+    box-shadow: 0 0 5px rgba(255,215,0,0.3);
+  }
+
+  input::placeholder { color: #f0e6d2; }
+
+  input:hover, input:focus {
+    box-shadow: 0 0 25px gold, 0 0 50px rgba(255,215,0,0.5);
+    outline: none;
+  }
+
+  button {
+    background: gold;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px gold;
+  }
+
+  button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 50px gold, 0 0 80px rgba(255,215,0,0.7);
+  }
+
+  .iti__country-list { background: #fff !important; color: #000 !important; }
+  .iti__country { color: #000 !important; }
+
+  footer {
+    margin-top: 50px;
+    color: #f0e6d2;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Tela de sucesso */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42,10,15,0.95);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: gold;
+    text-shadow: 0 0 10px gold;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  .success-overlay h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    animation: glow 1.5s infinite alternate;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px gold, 0 0 20px rgba(255,215,0,0.5); }
+    to { text-shadow: 0 0 30px gold, 0 0 60px rgba(255,215,0,0.7); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <div class="logo-outer"></div>
+    <div class="coin"><span>$</span></div>
+  </div>
+  <h1>Academia Horibuss</h1>
+  <p>Inscreve-te e entra na elite dos investidores 🌍💰</p>
+</header>
+
+<form id="inscricaoForm">
+  <input type="text" name="nome" placeholder="Nome completo" required>
+  <input type="email" name="email" placeholder="E-mail" required>
+  <input type="tel" id="telefone" name="telefone" placeholder="Telefone com DDI" required>
+  <button type="submit">🟡 Fazer inscrição</button>
+</form>
+
+<footer>
+  <p>© 2025 Academia Horibuss. Todos os direitos reservados.</p>
+</footer>
+
+<!-- Tela de sucesso -->
+<div class="success-overlay" id="successOverlay">
+  <h2>✅ Inscrição concluída!</h2>
+  <p>Estamos te aguardando na Academia Horibuss 🌟</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+  const input = document.querySelector("#telefone");
+  const iti = window.intlTelInput(input, {
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+      fetch('https://ipapi.co/json')
+        .then(res => res.json())
+        .then(data => callback(data.country_code))
+        .catch(() => callback("us"));
+    },
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+  });
+
+  const form = document.getElementById('inscricaoForm');
+  const overlay = document.getElementById('successOverlay');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const data = {
+      nome: form.nome.value,
+      email: form.email.value,
+      telefone: iti.getNumber()
+    };
+
+    fetch('https://formspree.io/f/mnngkjeq', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if(response.ok) {
+        // Mostra overlay de sucesso
+        overlay.style.display = "flex";
+
+        // Após 3s, redireciona para WhatsApp
+        setTimeout(() => {
+          window.location.href = "https://chat.whatsapp.com/JCjDwzAS5MQJ1lrttE21WZ";
+        }, 3000);
+      } else {
+        alert("❌ Erro ao enviar, tente novamente");
+        console.error("Erro HTTP:", response.status);
+      }
+    })
+    .catch(err => {
+      alert("❌ Erro de conexão, tente novamente");
+      console.error(err);
+    });
+  });
+</script>
+
+</body>
+</html>
